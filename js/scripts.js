@@ -27,19 +27,33 @@ $(window).ready(function()
 {
   var $target = $(".table tr:first");
 
-  var content ="";
-  products.forEach(function(product){
-    var line = '<tr class="prod" data-price="' + product.price +
-      '" data-quantity="' + product.quantity + '"><td><strong>' +
-      product.name + '</strong>';
-    if (product.veggie)
-      line += '&nbsp;<img src="img/vege-icon.png">';
-    line += '<p>' + product.description + '</p></td><td><span class="price"><strong>' +
-      product.price + ' €</strong></span></td><td class="quantity">' +
-      product.quantity + '</td><td><button class="btn btn-primary more">+</button><button class="btn btn-primary less">-</button></td></tr>';
-    content += line;
-  });
-  $target.after(content);
+  // var content ="";
+  // products.forEach(function(product){
+  //   var line = '<tr class="prod" data-price="' + product.price +
+  //     '" data-quantity="' + product.quantity + '"><td><strong>' +
+  //     product.name + '</strong>';
+  //   if (product.veggie)
+  //     line += '&nbsp;<img src="img/vege-icon.png">';
+  //   line += '<p>' + product.description + '</p></td><td><span class="price"><strong>' +
+  //     product.price + ' €</strong></span></td><td class="quantity">' +
+  //     product.quantity + '</td><td><button class="btn btn-primary more">+</button><button class="btn btn-primary less">-</button></td></tr>';
+  //   content += line;
+  // });
+
+  var template = Handlebars.compile($("#food-template").html());
+
+  var content = '';
+  // products.forEach(function(product){
+  //   content += template({
+  //     name:product.name,
+  //     price:product.price,
+  //     description: product.description,
+  //     veggie:product.veggie
+  //   });
+  // });
+  
+
+  $target.after(template(products));
 
   $(".overlay").hide();
 
